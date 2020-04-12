@@ -1,0 +1,50 @@
+<div class="navbar-fixed">
+  <nav class="teal lighten-2">
+    <div class="nav-wrapper container">
+      <a href="/" class="brand-logo">Real Estate App</a>
+      <a href="/" data-target="mobile-sidenav" class="sidenav-trigger">
+        <i class="hamburger-medium material-icons">menu</i></a>
+
+      <ul class="right hide-on-med-and-down">
+        {{#if isHome}}
+        <li class='active'><a href="/">Main</a></li>
+        {{else}}
+        <li><a href="/">Main</a></li>
+        {{/if}}
+
+        {{#if isRealty}}
+        <li class='active'><a href="/realty">Realty</a></li>
+        {{else}}
+        <li><a href="/realty">Realty</a></li>
+        {{/if}}
+
+        {{#if isLogin}}
+        <li class='active'><a href="/auth">Login</a></li>
+        {{else}}
+        <li><a href="/auth">Login</a></li>
+        {{/if}}
+      </ul>
+
+    </div>
+  </nav>
+</div>
+
+<ul class="sidenav" id="mobile-sidenav">
+  {{#if isHome}}
+  <li class='active'><a href="/">Main</a></li>
+  {{else}}
+  <li><a href="/">Main</a></li>
+  {{/if}}
+
+  {{#if isRealty}}
+  <li class='active'><a href="/realty">Realty</a></li>
+  {{else}}
+  <li><a href="/realty">Realty</a></li>
+  {{/if}}
+
+  {{#if isLogin}}
+  <li class='active'><a href="/auth">Login</a></li>
+  {{else}}
+  <li><a href="/auth">Login</a></li>
+  {{/if}}
+</ul>

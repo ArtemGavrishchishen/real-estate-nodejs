@@ -2,10 +2,18 @@ const express = require('express');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoStore = require('connect-mongodb-session')(session);
 const errorMidleware = require('./middleware/error');
+const varMidleware = require('./middleware/variables');
 const keys = require('./keys');
 
 const app = express();
+
+const store = new MongoStore({
+  collection: 'sessions',
+  uri: keys.MONGODB_URI,
+});
 
 //== hbs configurations in express - start
 const hbs = exphbs.create({
@@ -13,18 +21,29 @@ const hbs = exphbs.create({
   extname: 'hbs',
   helpers: require('./utils/hbs-helpers'),
 });
-
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views');
 //== hbs configurations in express - end
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  session({
+    secret: keys.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store,
+  })
+);
+app.use(varMidleware);
 
 //== Routes
 app.use('/', require('./routes/home'));
 app.use('/realty', require('./routes/realty'));
 app.use('/auth', require('./routes/auth'));
+app.use('/profile', require('./routes/profile'));
+app.use('/add', require('./routes/add'));
 
 app.use(errorMidleware);
 

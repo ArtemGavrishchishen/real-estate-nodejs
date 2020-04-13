@@ -18,10 +18,30 @@
         <li><a href="/realty">Realty</a></li>
         {{/if}}
 
+        {{#if isAuth}}
+
+        {{#if isSeller}}
+        {{#if isAdd}}
+        <li class='active'><a href="/add">Add property</a></li>
+        {{else}}
+        <li><a href="/add">Add property</a></li>
+        {{/if}}
+        {{/if}}
+
+        {{#if isProfile}}
+        <li class='active'><a href="/profile">Profile</a></li>
+        {{else}}
+        <li><a href="/profile">Profile</a></li>
+        {{/if}}
+
+        <li><a href="/auth/logout">Logout</a></li>
+        {{else}}
         {{#if isLogin}}
         <li class='active'><a href="/auth">Login</a></li>
         {{else}}
         <li><a href="/auth">Login</a></li>
+        {{/if}}
+
         {{/if}}
       </ul>
 

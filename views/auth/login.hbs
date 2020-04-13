@@ -32,6 +32,14 @@
     <h3 class="center-align">Create account</h3>
     <form action="/auth/register" method="POST">
 
+      <div class="input-field">
+        <select name="role">
+          <option value="customer" selected>Customer</option>
+          <option value="seller">Seller</option>
+        </select>
+        <label>Choose your role</label>
+      </div>
+
       <div class="input-field ">
         <input id="name" name="name" type="text" class="validate" required>
         <label for="name">Your name</label>

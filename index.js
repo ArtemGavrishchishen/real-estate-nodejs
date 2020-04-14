@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
 const errorMidleware = require('./middleware/error');
+const userMidleware = require('./middleware/user');
 const varMidleware = require('./middleware/variables');
 const keys = require('./keys');
 
@@ -19,7 +20,7 @@ const store = new MongoStore({
 const hbs = exphbs.create({
   defaultLayout: 'main',
   extname: 'hbs',
-  helpers: require('./utils/hbs-helpers'),
+  helpers: require('./_helpers/hbs-helpers'),
 });
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
@@ -37,6 +38,7 @@ app.use(
   })
 );
 app.use(varMidleware);
+app.use(userMidleware);
 
 //== Routes
 app.use('/', require('./routes/home'));

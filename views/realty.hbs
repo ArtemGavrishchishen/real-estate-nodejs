@@ -1,3 +1,76 @@
-<h1>Welcome!</h1>
+<div class="row">
+  <ul id="tabs-swipe" class="tabs tabs-fixed-width">
+    <li class="tab col s6"><a href="#rentals" class="active">RENTALS</a></li>
+    <li class="tab col s6"><a href="#sales">SALES</a></li>
+  </ul>
 
-<p>Realty page!</p>
+  {{!-- rentals --}}
+
+  <div id="rentals" class="row">
+    {{#if rentals.length}}
+    {{#each rentals}}
+    {{!-- <div class="row"> --}}
+    <div class="col s12 m6 xl4">
+      <div class="card medium hoverable">
+        <div class="card-image">
+          <img src="{{#each img}}{{#if @first}}{{this}}{{/if}}{{/each}}"
+            alt="{{title}}">
+          <span class="card-title">{{title}}</span>
+        </div>
+        <div class="card-content">
+          <p>Address: {{address}}</p>
+          <ul class="realty-list">
+            <li>Floor: <b>{{floor}}</b></li>
+            <li>Rooms: <b>{{rooms}}</b></li>
+            <li>Square: <b>{{square}}</b></li>
+          </ul>
+          <p>Seller: {{name}}</p>
+          <p class="right-align"><b><span class="price">{{price}}</span></b></p>
+        </div>
+        <div class="card-action">
+          <a href="#">Show more</a>
+        </div>
+      </div>
+    </div>
+    {{!-- </div> --}}
+    {{/each}}
+    {{else}}
+    <p>There are no ads in this category</p>
+    {{/if}}
+  </div>
+
+  {{!-- sales --}}
+  <div id="sales" class="row">
+    {{#if sales.length}}
+    {{#each sales}}
+    {{!-- <div class="row"> --}}
+    <div class="col s12 m6 xl4">
+      <div class="card medium hoverable">
+        <div class="card-image">
+          <img src="{{#each img}}{{#if @first}}{{this}}{{/if}}{{/each}}"
+            alt="{{title}}">
+          <span class="card-title">{{title}}</span>
+        </div>
+        <div class="card-content">
+          <p>Address: {{address}}</p>
+          <ul class="realty-list">
+            <li>Floor: <b>{{floor}}</b></li>
+            <li>Rooms: <b>{{rooms}}</b></li>
+            <li>Square: <b>{{square}}</b></li>
+          </ul>
+          <p>Seller: {{name}}</p>
+          <p class="right-align"><b><span class="price">{{price}}</span></b></p>
+        </div>
+        <div class="card-action">
+          <a href="#">Show more</a>
+        </div>
+      </div>
+    </div>
+    {{!-- </div> --}}
+    {{/each}}
+    {{else}}
+    <p>There are no ads in this category</p>
+    {{/if}}
+  </div>
+
+</div>

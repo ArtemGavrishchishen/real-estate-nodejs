@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const keys = require('../keys');
+const role = require('../_helpers/role');
 
 const schema = new Schema({
   email: { type: String, required: true },
@@ -7,8 +7,8 @@ const schema = new Schema({
   password: { type: String, required: true },
   role: {
     type: String,
-    enum: [keys.ROLE.customer, keys.ROLE.seller],
-    default: keys.ROLE.customer,
+    enum: [role.customer, role.seller],
+    default: role.customer,
     required: true,
   },
 });

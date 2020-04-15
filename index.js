@@ -39,7 +39,12 @@ app.use(
     store,
   })
 );
-app.use(fileMidleware.single('avatar'));
+app.use(
+  fileMidleware.fields([
+    { name: 'avatar', maxCount: 1 },
+    { name: 'property', maxCount: 1 },
+  ])
+);
 app.use(varMidleware);
 app.use(userMidleware);
 

@@ -6,7 +6,7 @@ body {
 
 main {
   flex: 1 0 auto;
-  padding: 15px 0px;
+  padding: 10px 0px;
 }
 
 .hamburger-medium {
@@ -24,4 +24,29 @@ main {
 .avatar {
   max-width: 300px;
   height: auto;
+}
+
+/* textarea */
+textarea.description:focus:not([readonly]) {
+  border-bottom: 1px solid #26a69a;
+  box-shadow: 0 1px 0 0 #26a69a;
+}
+
+textarea.description {
+  width: 100%;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 0;
+  outline: none;
+  line-height: normal;
+  overflow-y: hidden;
+  margin: 0 0 8px 0;
+  padding: 0.8rem 0 0.8rem 0;
+  resize: none;
+  min-height: 3rem;
+  box-sizing: border-box;
+  box-shadow: none;
+  transition: box-shadow 0.3s, border 0.3s, -webkit-box-shadow 0.3s;
 }

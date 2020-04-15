@@ -1,79 +1,91 @@
-<div class="row">
-  <h3 class="center-align">Add new item for advertising</h3>
+<h3 class="center-align">Add new item for advertising</h3>
 
-  <form class="col s12" action="/add" method="POST">
+<form action="/add" method="POST">
 
-    <div class="input-field">
+  <div class="row">
+    <div class="input-field col s12">
       <select name="type">
         <option value="rentals" selected>Rentals</option>
         <option value="sales">Sales</option>
       </select>
       <label>Choose type of an estate for an advertising</label>
     </div>
+  </div>
 
-    <div class="row">
-      <div class="input-field col s12 m6">
-        <input id="title" name="title" type="text" class="validate"
-          value="{{data.title}}" required>
-        <label for="title">Title</label>
-        <span class="helper-text" data-error="Add short description"
-          data-success="right"></span>
-      </div>
-
-      <div class="input-field col s12 m6">
-        <input id="address" name="address" type="text" class="validate"
-          value="{{data.address}}" required>
-        <label for="address">Address</label>
-        <span class="helper-text" data-error="Add address"
-          data-success="right"></span>
-      </div>
+  <div class="row">
+    <div class="input-field col s12 m6">
+      <input id="title" name="title" type="text" class="validate"
+        value="{{data.title}}" required>
+      <label for="title">Title</label>
+      <span class="helper-text" data-error="Add short description"
+        data-success="right"></span>
     </div>
 
-    <div class="row">
-      <div class="input-field col s3">
-        <input id="floor" name="floor" type="number" class="validate"
-          value="{{data.floor}}" required min='1'>
-        <label for="floor">Floor</label>
-        <span class="helper-text" data-error="Add floor"
-          data-success="right"></span>
-      </div>
+    <div class="input-field col s12 m6">
+      <input id="address" name="address" type="text" class="validate"
+        value="{{data.address}}" required>
+      <label for="address">Address</label>
+      <span class="helper-text" data-error="Add address"
+        data-success="right"></span>
+    </div>
+  </div>
 
-      <div class="input-field col s3">
-        <input id="rooms" name="rooms" type="number" class="validate"
-          value="{{data.rooms}}" required min='1'>
-        <label for="rooms">Rooms</label>
-        <span class="helper-text" data-error="Add number of rooms"
-          data-success="right"></span>
-      </div>
-
-      <div class="input-field col s3">
-        <input id="square" name="square" type="number" class="validate"
-          value="{{data.square}}" required min='1'>
-        <label for="square">Square</label>
-        <span class="helper-text" data-error="Add square"
-          data-success="right"></span>
-      </div>
-
-      <div class="input-field col s3">
-        <input id="price" name="price" type="number" class="validate"
-          value="{{data.price}}" required min='1'>
-        <label for="price">Price</label>
-        <span class="helper-text" data-error="Add price"
-          data-success="right"></span>
-      </div>
+  <div class="row">
+    <div class="input-field col s3">
+      <input id="floor" name="floor" type="number" class="validate"
+        value="{{data.floor}}" required min='1'>
+      <label for="floor">Floor</label>
+      <span class="helper-text" data-error="Add floor"
+        data-success="right"></span>
     </div>
 
-    <div class="row">
-      <div class="input-field col s12">
-        <textarea id="description" class="materialize-textarea"
-          data-length="120"></textarea>
+    <div class="input-field col s3">
+      <input id="rooms" name="rooms" type="number" class="validate"
+        value="{{data.rooms}}" required min='1'>
+      <label for="rooms">Rooms</label>
+      <span class="helper-text" data-error="Add number of rooms"
+        data-success="right"></span>
+    </div>
+
+    <div class="input-field col s3">
+      <input id="square" name="square" type="number" class="validate"
+        value="{{data.square}}" required min='1'>
+      <label for="square">Square</label>
+      <span class="helper-text" data-error="Add square"
+        data-success="right"></span>
+    </div>
+
+    <div class="input-field col s3">
+      <input id="price" name="price" type="number" class="validate"
+        value="{{data.price}}" required min='1'>
+      <label for="price">Price</label>
+      <span class="helper-text" data-error="Add price"
+        data-success="right"></span>
+    </div>
+  </div>
+  {{!-- materialize-textarea - When scaling the browser window down from desktop
+  to mobile the textarea overflows on the right making lots of white space.  --}}
+  <div class="row">
+    <div class="col s12">
+      <div class="input-field">
+        <textarea id="description" class="description"></textarea>
         <label for="description">Description</label>
       </div>
     </div>
+  </div>
 
-    <div class="right-align">
-      <button class="btn btn-primary">Add item</button>
+  <div class="file-field input-field">
+    <div class="btn">
+      <span>Photos</span>
+      <input type="file" name="property">
     </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text">
+    </div>
+  </div>
 
-  </form>
-</div>
+  <div class="right-align">
+    <button type="submit" class="btn btn-primary">Add item</button>
+  </div>
+
+</form>

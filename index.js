@@ -7,6 +7,7 @@ const MongoStore = require('connect-mongodb-session')(session);
 const errorMidleware = require('./middleware/error');
 const userMidleware = require('./middleware/user');
 const varMidleware = require('./middleware/variables');
+const fileMidleware = require('./middleware/file');
 const keys = require('./keys');
 
 const app = express();
@@ -28,6 +29,7 @@ app.set('views', 'views');
 //== hbs configurations in express - end
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(express.urlencoded({ extended: true }));
 app.use(
   session({
@@ -37,6 +39,7 @@ app.use(
     store,
   })
 );
+app.use(fileMidleware.single('avatar'));
 app.use(varMidleware);
 app.use(userMidleware);
 

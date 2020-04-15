@@ -5,6 +5,7 @@ const schema = new Schema({
   email: { type: String, required: true },
   name: { type: String },
   password: { type: String, required: true },
+  avatarUrl: { type: String },
   role: {
     type: String,
     enum: [role.customer, role.seller],

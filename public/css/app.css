@@ -20,3 +20,8 @@ main {
   margin: 0;
   padding: 0;
 }
+
+.avatar {
+  max-width: 300px;
+  height: auto;
+}

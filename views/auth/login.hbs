@@ -7,7 +7,7 @@
   {{!-- login --}}
   <div id="login" class="col s6 offset-s3">
     <h3 class="center-align">Enter account</h3>
-    <form action="/auth/login" method="POST">
+    <form action="/auth/login" method="POST" novalidate>
 
       <div class="input-field ">
         <input id="email" name="email" type="email" class="validate" required>
@@ -30,7 +30,7 @@
   {{!-- register --}}
   <div id="register" class="col s6 offset-s3">
     <h3 class="center-align">Create account</h3>
-    <form action="/auth/register" method="POST">
+    <form action="/auth/register" method="POST" novalidate>
 
       <div class="input-field">
         <select name="role">

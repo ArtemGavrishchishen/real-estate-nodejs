@@ -12,6 +12,8 @@ const schema = new Schema({
     default: role.customer,
     required: true,
   },
+  resetToken: { type: String },
+  resetTokenExp: { type: Date },
 });
 
 module.exports = model('User', schema);

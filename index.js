@@ -48,7 +48,7 @@ app.use(
 app.use(varMidleware);
 app.use(userMidleware);
 
-//== Routes
+//=== Routes
 app.use('/', require('./routes/home'));
 app.use('/realty', require('./routes/realty'));
 app.use('/auth', require('./routes/auth'));

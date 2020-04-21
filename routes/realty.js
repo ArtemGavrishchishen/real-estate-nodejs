@@ -25,4 +25,18 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const estate = await Estate.findById(req.params.id).lean();
+
+    res.render('estate', {
+      layout: 'empty',
+      title: estate.title,
+      estate,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;

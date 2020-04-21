@@ -6,7 +6,6 @@ body {
 
 main {
   flex: 1 0 auto;
-  padding: 10px 0px;
 }
 
 .hamburger-medium {
@@ -24,6 +23,38 @@ main {
 .avatar {
   max-width: 300px;
   height: auto;
+}
+
+/* estate */
+
+.estate .head {
+  min-height: 100px;
+  background-color: #eee;
+  font-size: 16px;
+  color: #616161;
+  margin-bottom: 15px;
+  padding: 15px 0;
+}
+
+.estate .title {
+  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.estate .price {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.estate img {
+  width: 100%;
+  height: auto;
+}
+
+.estate .contact {
+  background-color: #eee;
+  padding: 25px 20px;
 }
 
 /* textarea */

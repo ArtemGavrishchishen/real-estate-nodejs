@@ -29,6 +29,9 @@
         </div>
         <div class="card-action">
           <a href="/realty/{{_id}}">Show more</a>
+          {{#ifeq userId._id @root.userId}}
+          <a href="/realty/{{_id}}/edit?allow=true">Edit</a>
+          {{/ifeq}}
         </div>
       </div>
     </div>
@@ -62,7 +65,10 @@
           <p class="right-align"><b><span class="price">{{price}}</span></b></p>
         </div>
         <div class="card-action">
-          <a href="#">Show more</a>
+          <a href="/realty/{{_id}}">Show more</a>
+          {{#ifeq userId._id @root.userId}}
+          <a href="/realty/{{_id}}/edit?allow=true">Редактировать</a>
+          {{/ifeq}}
         </div>
       </div>
     </div>

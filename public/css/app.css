@@ -57,6 +57,27 @@ main {
   padding: 25px 20px;
 }
 
+.estate .aget-avatar {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border: 2px solid #fff;
+  border-radius: 40px;
+  margin-right: 25px;
+  text-align: center;
+}
+
+.estate .aget-noavatar {
+  height: 100%;
+  padding-top: 20px;
+  font-size: 12px;
+}
+
+/* edit  */
+.edit-form {
+  margin-bottom: 25px;
+}
+
 /* textarea */
 textarea.description:focus:not([readonly]) {
   border-bottom: 1px solid #26a69a;

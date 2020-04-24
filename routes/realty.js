@@ -33,11 +33,13 @@ router.get('/:id', async (req, res) => {
     const estate = await Estate.findById(req.params.id)
       .populate('userId', 'name email avatarUrl')
       .lean();
+    const isArrImg = estate.img.length > 1 ? true : false;
 
     res.render('estate', {
       layout: 'empty',
       title: estate.title,
       estate,
+      isArrImg,
       agent: estate.userId,
     });
   } catch (error) {

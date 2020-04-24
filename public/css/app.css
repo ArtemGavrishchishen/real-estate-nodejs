@@ -52,6 +52,25 @@ main {
   height: auto;
 }
 
+.estate-photo {
+  margin-bottom: 25px;
+}
+
+@media (min-width: 992px) {
+  .estate-photo {
+    margin-bottom: 0;
+  }
+
+  .estate .contact {
+    position: sticky;
+    top: 80px;
+  }
+
+  .estate .contact-wrapper {
+    min-height: 625px;
+  }
+}
+
 .estate .contact {
   background-color: #eee;
   padding: 25px 20px;

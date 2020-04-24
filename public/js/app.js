@@ -40,4 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
   M.Tabs.init(document.querySelectorAll('#tabs-swipe'));
   M.FormSelect.init(document.querySelectorAll('select'));
   M.Parallax.init(document.querySelectorAll('.parallax'));
+
+  const options = { fullWidth: true, indicators: true };
+  M.Carousel.init(document.querySelectorAll('.carousel-slider'), options);
 });

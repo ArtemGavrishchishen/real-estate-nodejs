@@ -44,3 +44,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const options = { fullWidth: true, indicators: true };
   M.Carousel.init(document.querySelectorAll('.carousel-slider'), options);
 });
+
+const toast = document.querySelector('.toast');
+if (toast) {
+  M.toast({ html: toast.value });
+}

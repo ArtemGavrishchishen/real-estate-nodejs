@@ -1,10 +1,10 @@
 const { body } = require('express-validator');
 const User = require('../models/user');
 const role = require('./role');
+const type = require('./type-estate');
 
 exports.registerValidators = [
   body('role')
-    .isLength({ min: 3 })
     .isIn([role.customer, role.seller])
     .withMessage('Choose correct role: Customer or Seller')
     .trim(),
@@ -64,5 +64,28 @@ exports.loginValidators = [
   body('password', 'Password should be at least 6 characters')
     .isLength({ min: 6, max: 26 })
     .isAlphanumeric()
+    .trim(),
+];
+
+exports.realtyValidators = [
+  body('type')
+    .isIn([type.rentals, type.sales])
+    .withMessage('Choose correct type: Rentals or Sales')
+    .trim(),
+  body('title')
+    .isLength({ min: 1 })
+    .withMessage('Please, enter the title')
+    .trim(),
+  body('address')
+    .isLength({ min: 1 })
+    .withMessage('Please, enter the Address')
+    .trim(),
+  body('floor').isNumeric().withMessage('Enter the correct floor').trim(),
+  body('rooms').isNumeric().withMessage('Enter the correct rooms').trim(),
+  body('square').isNumeric().withMessage('Enter the correct square').trim(),
+  body('price').isNumeric().withMessage('Enter the correct price').trim(),
+  body('description')
+    .isLength({ max: 250 })
+    .withMessage('Description must be no more than 250 characters')
     .trim(),
 ];

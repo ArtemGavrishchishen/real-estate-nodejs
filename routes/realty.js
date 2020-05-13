@@ -1,4 +1,6 @@
 const { Router } = require('express');
+const { validationResult } = require('express-validator');
+const { realtyValidators } = require('../_helpers/validators');
 const Estate = require('../models/estate');
 const typeEstate = require('../_helpers/type-estate');
 const auth = require('../middleware/auth');
@@ -64,6 +66,39 @@ router.get('/:id/edit', auth, async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+  }
+});
+
+router.post('/edit', auth, realtyValidators, async (req, res) => {
+  const { id } = req.body;
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).redirect(`/realty/${id}/edit?allow=true`);
+  }
+  try {
+    delete req.body.id;
+    const realty = await Estate.findById(id);
+
+    if (!isOwner(realty, req)) {
+      return res.redirect('/realty');
+    }
+
+    Object.assign(realty, req.body);
+    await realty.save();
+    res.redirect('/realty');
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.post('/remove', auth, async (req, res) => {
+  const { id } = req.body;
+  try {
+    await Estate.deleteOne({ _id: id, userId: req.user._id });
+    res.redirect('/realty');
+  } catch (e) {
+    console.log(e);
   }
 });
 

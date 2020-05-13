@@ -4,6 +4,27 @@
   <form action="/realty/edit" method="POST">
 
     <div class="row">
+      <div class="input-field col s12">
+        <select name="type">
+          {{#ifeq estate.type 'rentals'}}
+          <option value="rentals" selected>Rentals</option>
+          {{else}}
+          <option value="rentals">Rentals</option>
+          {{/ifeq}}
+
+          {{#ifeq estate.type 'sales'}}
+          <option value="sales" selected>Sales</option>
+          {{else}}
+          <option value="sales">Sales</option>
+          {{/ifeq}}
+
+
+        </select>
+        <label>Choose type of an estate for an advertising</label>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="input-field col s12 m6">
         <input id="title" name="title" type="text" class="validate"
           value="{{estate.title}}" required>
@@ -66,12 +87,15 @@
       </div>
     </div>
 
+    <input type="hidden" name='id' value="{{estate._id}}">
+
     <button type="submit" class="btn btn-primary">Edit</button>
   </form>
 </div>
 
 <div class="remove-form">
   <form action="/realty/remove" method="POST">
+    <input type="hidden" name='id' value="{{estate._id}}">
     <div class="row">
       <button type="submit" class="btn red">Delete</button>
     </div>

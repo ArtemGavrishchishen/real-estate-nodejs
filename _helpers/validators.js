@@ -89,3 +89,54 @@ exports.realtyValidators = [
     .withMessage('Description must be no more than 250 characters')
     .trim(),
 ];
+
+exports.passwordValidators = [
+  body('password', 'Password should be at least 6 characters')
+    .isLength({ min: 6, max: 26 })
+    .isAlphanumeric()
+    .trim(),
+  body('confirm')
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error('Passwords should match');
+      }
+      return true;
+    })
+    .trim(),
+];
+
+exports.emailValidators = [
+  body('email')
+    .isEmail()
+    .withMessage('Enter correct email')
+    .normalizeEmail()
+    .custom(async (value, { req }) => {
+      try {
+        const user = await User.findOne({ email: value });
+
+        if (!user) {
+          return Promise.reject("There's no such user");
+        }
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
+    })
+    .trim(),
+];
+
+exports.contactValidators = [
+  body('name')
+    .isLength({ min: 3 })
+    .withMessage('Name should be at least 3 characters')
+    .trim(),
+  body('email')
+    .isEmail()
+    .withMessage('Enter correct email')
+    .normalizeEmail()
+    .trim(),
+  body('description')
+    .isLength({ max: 250 })
+    .withMessage('Description must be no more than 250 characters')
+    .trim(),
+];

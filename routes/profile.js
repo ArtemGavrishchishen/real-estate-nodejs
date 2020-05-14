@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const fs = require('fs');
 const User = require('../models/user');
 const auth = require('../middleware/auth');
 
@@ -21,7 +22,18 @@ router.post('/', auth, async (req, res) => {
       toChange.name = req.body.name;
     }
 
-    if (req.files) {
+    if (req.files.avatar) {
+      const oldAvatar = user.avatarUrl;
+
+      fs.access(oldAvatar, fs.constants.F_OK, (err) => {
+        if (err) return;
+
+        fs.unlink(oldAvatar, (err) => {
+          if (err) throw err;
+          console.log('Old avatar was deleted');
+        });
+      });
+
       const avatars = req.files.avatar;
       toChange.avatarUrl = avatars[0].path;
     }

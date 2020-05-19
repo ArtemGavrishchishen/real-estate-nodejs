@@ -37,10 +37,17 @@ router.post('/', auth, realtyValidators, async (req, res) => {
         square: req.body.square,
         type: req.body.type,
         description: req.body.description,
-        img: req.body.img || [],
+        img: req.files.property || [],
         userId: req.user,
       },
     });
+  }
+
+  // toChange.avatarUrl = avatars[0].path;
+  let imgSrc = [];
+  if (req.files.property) {
+    const files = req.files.property;
+    imgSrc = files.map((file) => file.path);
   }
 
   const estate = new Estate({
@@ -52,7 +59,7 @@ router.post('/', auth, realtyValidators, async (req, res) => {
     square: req.body.square,
     type: req.body.type,
     description: req.body.description,
-    img: req.body.img || [],
+    img: imgSrc,
     userId: req.user,
   });
 

@@ -26,7 +26,7 @@ router.post('/', auth, async (req, res) => {
       const oldAvatar = user.avatarUrl;
 
       fs.access(oldAvatar, fs.constants.F_OK, (err) => {
-        if (err) return;
+        if (err) throw err;
 
         fs.unlink(oldAvatar, (err) => {
           if (err) throw err;

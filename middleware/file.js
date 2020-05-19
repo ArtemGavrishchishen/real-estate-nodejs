@@ -1,4 +1,5 @@
 const multer = require('multer');
+const fs = require('fs');
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -6,13 +7,26 @@ const storage = multer.diskStorage({
       return cb(null, 'images/avatar');
     }
     if (file.fieldname === 'property') {
-      return cb(null, 'images/property');
+      if (!req.user) {
+        return cb(null, 'images/property');
+      }
+
+      const { _id } = req.user;
+      const path = `images/property/${_id}`;
+
+      fs.access(path, fs.constants.F_OK, (err) => {
+        if (err) {
+          return fs.mkdir(path, (err) => {
+            if (err) throw err;
+            cb(null, path);
+          });
+        }
+        return cb(null, path);
+      });
     }
-    cb(null, 'images');
   },
   filename(req, file, cb) {
-    const name = Date.now() + '-' + file.originalname;
-    cb(null, name);
+    cb(null, file.originalname);
   },
 });
 

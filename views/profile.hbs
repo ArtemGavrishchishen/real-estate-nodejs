@@ -36,4 +36,7 @@
       <button type="submit" class="btn ">Change</button>
     </form>
   </div>
+  {{#if errors}}
+  <input type="hidden" class="toast" value="{{errors}}">
+  {{/if}}
 </div>

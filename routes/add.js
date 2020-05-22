@@ -43,7 +43,6 @@ router.post('/', auth, realtyValidators, async (req, res) => {
     });
   }
 
-  // toChange.avatarUrl = avatars[0].path;
   let imgSrc = [];
   if (req.files.property) {
     const files = req.files.property;

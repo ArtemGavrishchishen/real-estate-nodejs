@@ -88,6 +88,9 @@
     </div>
 
     <input type="hidden" name='id' value="{{estate._id}}">
+    {{#if errors}}
+    <input type="hidden" class="toast" value="{{errors}}">
+    {{/if}}
 
     <button type="submit" class="btn btn-primary">Edit</button>
   </form>

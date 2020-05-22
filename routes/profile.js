@@ -25,14 +25,16 @@ router.post('/', auth, async (req, res) => {
     if (req.files.avatar) {
       const oldAvatar = user.avatarUrl;
 
-      fs.access(oldAvatar, fs.constants.F_OK, (err) => {
-        if (err) throw err;
-
-        fs.unlink(oldAvatar, (err) => {
+      if (oldAvatar) {
+        fs.access(oldAvatar, fs.constants.F_OK, (err) => {
           if (err) throw err;
-          console.log('Old avatar was deleted');
+
+          fs.unlink(oldAvatar, (err) => {
+            if (err) throw err;
+            console.log('Old avatar was deleted');
+          });
         });
-      });
+      }
 
       const avatars = req.files.avatar;
       toChange.avatarUrl = avatars[0].path;

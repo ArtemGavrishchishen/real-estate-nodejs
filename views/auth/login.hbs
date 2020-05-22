@@ -1,13 +1,22 @@
 <div class="row">
   <ul id="tabs-swipe" class="tabs tabs-fixed-width">
+    {{#if isLoginTabs}}
     <li class="tab col s6"><a href="#login" class="active">Sign in</a></li>
+    {{else}}
+    <li class="tab col s6"><a href="#login">Sign in</a></li>
+    {{/if}}
+
+    {{#if isRegisterTabs}}
+    <li class="tab col s6"><a href="#register" class="active">Sign up</a></li>
+    {{else}}
     <li class="tab col s6"><a href="#register">Sign up</a></li>
+    {{/if}}
   </ul>
 
   {{!-- login --}}
   <div id="login" class="col s12 m8 l6 offset-m2 offset-l3">
     <h3 class="center-align">Enter account</h3>
-    <form action="/auth/login" method="POST" novalidate>
+    <form action="/auth/login" method="POST">
 
       <div class="input-field ">
         <input id="email" name="email" type="email" class="validate" required>
@@ -30,38 +39,49 @@
   {{!-- register --}}
   <div id="register" class="col s12 m8 l6 offset-m2 offset-l3">
     <h3 class="center-align">Create account</h3>
-    <form action="/auth/register" method="POST" novalidate>
+    <form action="/auth/register" method="POST">
 
       <div class="input-field">
         <select name="role">
+          {{#ifeq role "customer"}}
           <option value="customer" selected>Customer</option>
+          {{else}}
+          <option value="customer">Customer</option>
+          {{/ifeq}}
+
+          {{#ifeq data.role "seller"}}
+          <option value="seller" selected>Seller</option>
+          {{else}}
           <option value="seller">Seller</option>
+          {{/ifeq}}
         </select>
         <label>Choose your role</label>
       </div>
 
       <div class="input-field ">
-        <input id="name" name="name" type="text" class="validate" required>
-        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" class="validate"
+          value="{{data.name}}" required>
+        <label for=" name">Your name</label>
         <span class="helper-text" data-error="Enter name"></span>
       </div>
 
       <div class="input-field ">
-        <input id="remail" name="email" type="email" class="validate" required>
+        <input id="remail" name="email" type="email" class="validate"
+          value="{{data.email}}" required>
         <label for="remail">Email</label>
         <span class="helper-text" data-error="Enter Email"></span>
       </div>
 
       <div class="input-field ">
         <input id="rpassword" name="password" type="password" class="validate"
-          required>
+          value="{{data.password}}" required>
         <label for="rpassword">Password</label>
         <span class="helper-text" data-error="Enter password"></span>
       </div>
 
       <div class="input-field ">
         <input id="confirm" name="confirm" type="password" class="validate"
-          required>
+          value="{{data.confirm}}" required>
         <label for="confirm">Enter password once more</label>
         <span class="helper-text" data-error="Enter password once more"></span>
       </div>
@@ -70,4 +90,7 @@
     </form>
   </div>
 
+  {{#if errors}}
+  <input type="hidden" class="toast" value="{{errors}}">
+  {{/if}}
 </div>

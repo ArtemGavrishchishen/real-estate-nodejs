@@ -15,6 +15,8 @@ router.get('/', (req, res) => {
   res.render('auth/login', {
     title: 'Authorization',
     isLogin: true,
+    isLoginTabs: true,
+    errors: req.flash('errors'),
   });
 });
 
@@ -24,8 +26,19 @@ router.post('/register', registerValidators, async (req, res) => {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log('registerError', errors.array()[0].msg);
-      return res.status(422).redirect('/auth#register');
+      return res.status(422).render('auth/login', {
+        title: 'Authorization',
+        isLogin: true,
+        errors: errors.array()[0].msg,
+        isRegisterTabs: true,
+        data: {
+          role: req.body.role,
+          email: req.body.email,
+          name: req.body.name,
+          password: req.body.password,
+          confirm: req.body.confirm,
+        },
+      });
     }
 
     const hashPassword = await bcrypt.hash(password, 10);
@@ -49,7 +62,7 @@ router.post('/login', loginValidators, async (req, res) => {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log('loginError', errors.array()[0].msg);
+      req.flash('errors', errors.array()[0].msg);
       return res.status(422).redirect('/auth#login');
     }
 
@@ -66,6 +79,7 @@ router.post('/login', loginValidators, async (req, res) => {
         res.redirect('/');
       });
     } else {
+      req.flash('errors', 'Enter the correct password');
       res.redirect('/auth#login');
     }
   } catch (error) {

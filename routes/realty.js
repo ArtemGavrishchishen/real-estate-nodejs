@@ -1,10 +1,12 @@
 const { Router } = require('express');
+const fs = require('fs');
 const { validationResult } = require('express-validator');
 const { realtyValidators } = require('../_helpers/validators');
 const Estate = require('../models/estate');
 const typeEstate = require('../_helpers/type-estate');
 const auth = require('../middleware/auth');
 const isOwner = require('../_helpers/isOwner');
+const keys = require('../keys');
 
 const router = Router();
 
@@ -32,6 +34,7 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
   try {
+    const { BASE_URL } = keys;
     const estate = await Estate.findById(req.params.id)
       .populate('userId', 'name email avatarUrl')
       .lean();
@@ -43,6 +46,7 @@ router.get('/:id', async (req, res) => {
       estate,
       isArrImg,
       agent: estate.userId,
+      BASE_URL,
     });
   } catch (error) {
     console.log(error);
@@ -95,7 +99,23 @@ router.post('/edit', auth, realtyValidators, async (req, res) => {
 router.post('/remove', auth, async (req, res) => {
   const { id } = req.body;
   try {
-    await Estate.deleteOne({ _id: id, userId: req.user._id });
+    const deleted = await Estate.findOneAndDelete({
+      _id: id,
+      userId: req.user._id,
+    });
+    if (deleted.img.length !== 0) {
+      deleted.img.map((item) => {
+        fs.access(item, fs.constants.F_OK, (err) => {
+          if (err) throw err;
+
+          fs.unlink(item, (err) => {
+            if (err) throw err;
+            console.log('Estate img was deleted');
+          });
+        });
+      });
+    }
+
     res.redirect('/realty');
   } catch (e) {
     console.log(e);

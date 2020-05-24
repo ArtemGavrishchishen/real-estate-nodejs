@@ -106,10 +106,10 @@ router.post('/remove', auth, async (req, res) => {
     if (deleted.img.length !== 0) {
       deleted.img.map((item) => {
         fs.access(item, fs.constants.F_OK, (err) => {
-          if (err) throw err;
+          if (err) return;
 
           fs.unlink(item, (err) => {
-            if (err) throw err;
+            if (err) return;
             console.log('Estate img was deleted');
           });
         });

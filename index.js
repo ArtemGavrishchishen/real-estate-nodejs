@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const csurf = require('csurf');
 const exphbs = require('express-handlebars');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');
@@ -41,11 +42,12 @@ app.use(
     store,
   })
 );
-app.use(varMidleware);
-app.use(userMidleware);
 app.use(
   fileMidleware.fields([{ name: 'avatar', maxCount: 1 }, { name: 'property' }])
 );
+app.use(csurf());
+app.use(varMidleware);
+app.use(userMidleware);
 
 //=== Routes
 app.use('/', require('./routes/home'));

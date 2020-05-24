@@ -27,10 +27,10 @@ router.post('/', auth, async (req, res) => {
 
       if (oldAvatar) {
         fs.access(oldAvatar, fs.constants.F_OK, (err) => {
-          if (err) throw err;
+          if (err) return;
 
           fs.unlink(oldAvatar, (err) => {
-            if (err) throw err;
+            if (err) return;
             console.log('Old avatar was deleted');
           });
         });

@@ -77,6 +77,7 @@ main {
 }
 
 .estate .aget-avatar {
+  display: flex;
   width: 80px;
   height: 80px;
   overflow: hidden;

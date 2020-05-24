@@ -1,6 +1,6 @@
 <h3 class="center-align">Add new item for advertising</h3>
 
-<form action="/add" method="POST" enctype="multipart/form-data" novalidate>
+<form action="/add" method="POST" enctype="multipart/form-data">
 
   <div class="row">
     <div class="input-field col s12">
@@ -84,6 +84,8 @@
         placeholder="Upload one or more files">
     </div>
   </div>
+
+  <input type="hidden" name="_csrf" value="{{csrf}}">
 
   <div class="row">
     <div class="right-align">

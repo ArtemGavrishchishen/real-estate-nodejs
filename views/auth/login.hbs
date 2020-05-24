@@ -32,6 +32,8 @@
       </div>
 
       <p><a href="/auth/reset">Forget password</a></p>
+
+      <input type="hidden" name="_csrf" value="{{csrf}}">
       <button type="submit" class="btn btn-primary">Enter</button>
     </form>
   </div>
@@ -86,6 +88,7 @@
         <span class="helper-text" data-error="Enter password once more"></span>
       </div>
 
+      <input type="hidden" name="_csrf" value="{{csrf}}">
       <button type="submit" class="btn btn-primary">Register</button>
     </form>
   </div>

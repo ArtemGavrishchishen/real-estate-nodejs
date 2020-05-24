@@ -88,9 +88,7 @@
     </div>
 
     <input type="hidden" name='id' value="{{estate._id}}">
-    {{#if errors}}
-    <input type="hidden" class="toast" value="{{errors}}">
-    {{/if}}
+    <input type="hidden" name="_csrf" value="{{csrf}}">
 
     <button type="submit" class="btn btn-primary">Edit</button>
   </form>
@@ -99,8 +97,13 @@
 <div class="remove-form">
   <form action="/realty/remove" method="POST">
     <input type="hidden" name='id' value="{{estate._id}}">
+    <input type="hidden" name="_csrf" value="{{csrf}}">
+
     <div class="row">
       <button type="submit" class="btn red">Delete</button>
     </div>
   </form>
 </div>
+{{#if errors}}
+<input type="hidden" class="toast" value="{{errors}}">
+{{/if}}

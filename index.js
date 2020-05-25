@@ -4,6 +4,8 @@ const csurf = require('csurf');
 const exphbs = require('express-handlebars');
 const flash = require('connect-flash');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
+const compression = require('compression');
 const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
 const errorMidleware = require('./middleware/error');
@@ -42,12 +44,14 @@ app.use(
     store,
   })
 );
+app.use(userMidleware);
 app.use(
   fileMidleware.fields([{ name: 'avatar', maxCount: 1 }, { name: 'property' }])
 );
 app.use(csurf());
+app.use(helmet());
+app.use(compression());
 app.use(varMidleware);
-app.use(userMidleware);
 
 //=== Routes
 app.use('/', require('./routes/home'));
